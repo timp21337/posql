@@ -1,0 +1,21 @@
+#set $Response.ContentType = "text/plain"
+#set $doneOneTitle=false
+#if ($titles) #begin
+#foreach $title in $titles #begin
+#if ($doneOneTitle) #begin ,#else #begin
+#set $doneOneTitle=true
+#end
+"$(title)"#end 
+#end
+
+
+#foreach $result in $results #begin
+#set $doneOneItem=false
+#foreach $item in $result #begin
+#if ($doneOneItem) #begin ,#else #begin
+#set $doneOneItem=true
+#end
+"$(item)"#end 
+
+#end
+

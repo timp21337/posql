@@ -5,51 +5,37 @@
   <title>POSQL</title>
  </head>
 <body>
-<div align=center>
+<div align="center">
 #if ($debug) {
 Debug: $debug
 }
 
-#if ($caption) {
   <h1>$caption</h1>
-} #else { 
-  <h1>Plain Old SQL</h1>
-}
+
 #if (! $hideForm) {
-  <form method=get>
+  <form method="get">
   <p>
-   Db name <input type=test name=db 
+   Db name <input type="test" name="db" 
 #if ($db) {  
-    value=$db
+    value="$db"
 }
    >
   </p>
 <p>Enter plain old SQL below</p>
-<p><textarea name=query rows=5 cols=50>$query</textarea>
+<p><textarea name="query" rows="5" cols="50">$query</textarea>
 <p>
-  CSV output <input type=checkbox name=csv
+  CSV output <input type="checkbox" name="csv"
 #if ($csv) {  
     checked
 }   
   >
 </p>
 <p>
-<input type=submit name=Run value=Run>
+<input type="submit" name="Run" value="Run">
 </p>
   </form>
 }
 
-#if ($exception) {
-<div style="border:1px solid red; width: 80%">
-<p>Your query generated the following exception:</p>
-<h4>$exception.getMessage()</h4>
-<div align=left>
-<font color=red>
-<pre>$trace</pre>
-</font>
-</div>
-</div>
-}
 
 #if ($status) {
 <p>$status</p>
@@ -73,6 +59,19 @@ Debug: $debug
  }
 </table>
 }
+
+#if ($exception) {
+<div style="border:1px solid red; width: 80%; ">
+<p>Your query generated the following exception:</p>
+<h4>$exception.getMessage()</h4>
+<div align="left" style="margin:5px;">
+<font color="red">
+<pre>$trace</pre>
+</font>
+</div>
+</div>
+}
+
 </div>
 </body>
 </html>

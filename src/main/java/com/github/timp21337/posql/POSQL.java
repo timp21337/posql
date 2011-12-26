@@ -19,16 +19,19 @@ import org.webmacro.servlet.WebContext;
 public class POSQL extends WMServlet {
 
   public Template handle(WebContext context) throws HandlerException {
+    String caption = context.getForm("caption");
+    caption = caption == null ? "Plain Old SQL" : caption;
+    context.put("caption", caption);
     String dbName = context.getForm("db");
     context.put("db", dbName);
     String csv = context.getForm("csv");
     context.put("csv", csv);
     String templateName = csv == null ? "POSQL.wm" : "CSV.wm";
+    
     context.put("query", "");
     String query = context.getForm("query");
     if (query != null) {
-      if (!query.trim().toUpperCase().startsWith("SELECT"))
-        throw new HandlerException("Queries must start with SELECT");
+      checkQuery(query);
       context.put("query", query);
       try {
         Connection conn = getConnection(dbName);
@@ -61,15 +64,18 @@ public class POSQL extends WMServlet {
       }
     }
 
-    context.put("returnURL", context.getForm("returnURL"));
-    context.put("caption", context.getForm("caption"));
-
-    // return the appropriate Template
     try {
       return (Template) context.getBroker().get("template", templateName);
     } catch (Exception e) {
       throw new HandlerException("Could not locate template: " + templateName);
     }
+  }
+
+  private void checkQuery(String query) throws HandlerException {
+    if (!query.trim().toUpperCase().startsWith("SELECT"))
+      throw new HandlerException("Queries must start with SELECT.");
+    if (query.indexOf(';') != -1)
+      throw new HandlerException("Only one query allowed.");      
   }
 
   public String stackTraceToString(Throwable e) {

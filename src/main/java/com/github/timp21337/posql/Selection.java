@@ -20,7 +20,8 @@ public class Selection extends WMServlet {
 
   public Template handle(WebContext context) throws HandlerException {
     String caption = context.getForm("caption");
-    caption = caption == null ? "Plain Old SQL" : caption;
+    if (caption == null)
+     caption =  "Plain Old SQL";
     context.put("caption", caption);
     String dbName = context.getForm("db");
     context.put("db", dbName);
@@ -30,6 +31,7 @@ public class Selection extends WMServlet {
     
     context.put("query", "");
     String query = context.getForm("query");
+    context.put("debug", "Query:" + query);
     if (query != null) {
       checkQuery(query);
       context.put("query", query);
@@ -72,6 +74,7 @@ public class Selection extends WMServlet {
     }
   }
 
+  
   private void checkQuery(String query) throws HandlerException {
     if (!query.trim().toUpperCase().startsWith("SELECT"))
       throw new HandlerException("Queries must start with SELECT.");

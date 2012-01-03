@@ -8,4 +8,4 @@ password=admin
 
 mvn jetty:run 
 
-access at http://localhost:8080/posql/posql
+access at http://localhost:8080/posql/selection

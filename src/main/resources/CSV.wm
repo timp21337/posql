@@ -1,4 +1,5 @@
 #set $Response.ContentType = "text/plain"
+$Response.addHeader("Content-Disposition","attachment; filename=\"selection.csv\"")
 #set $doneOneTitle=false
 #if ($titles) #begin
 #foreach $title in $titles #begin

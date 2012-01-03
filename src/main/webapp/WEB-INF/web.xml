@@ -11,7 +11,7 @@
 
  <servlet-mapping>
   <servlet-name>posql</servlet-name>
-  <url-pattern>/posql/*</url-pattern>
+  <url-pattern>/selection/*</url-pattern>
  </servlet-mapping>
   
 </web-app>

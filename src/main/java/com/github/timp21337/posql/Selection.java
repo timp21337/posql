@@ -20,18 +20,23 @@ public class Selection extends WMServlet {
 
   public Template handle(WebContext context) throws HandlerException {
     String caption = context.getForm("caption");
-    if (caption == null || caption.equals(""))
+    if (caption == null)
      caption =  "Plain Old SQL";
     context.put("caption", caption);
+    
+    context.put("hideForm", context.getForm("hideForm"));
+    
     String dbName = context.getForm("db");
     context.put("db", dbName);
+    
     String csv = context.getForm("csv");
     context.put("csv", csv);
+    
     String templateName = csv == null ? "POSQL.wm" : "CSV.wm";
     
     context.put("query", "");
     String query = context.getForm("query");
-    context.put("debug", "Query:" + query);
+    //context.put("debug", "Query:" + query);
     if (query != null) {
       checkQuery(query);
       context.put("query", query);
@@ -79,7 +84,7 @@ public class Selection extends WMServlet {
     if (!query.trim().toUpperCase().startsWith("SELECT"))
       throw new HandlerException("Queries must start with SELECT.");
     if (query.indexOf(';') != -1)
-      throw new HandlerException("Only one query allowed.");      
+      throw new HandlerException("No semi-colons alowed in query");      
   }
 
   public String stackTraceToString(Throwable e) {

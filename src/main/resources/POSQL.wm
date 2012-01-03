@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40-971218/loose.dtd">
 <HTML>
  <head>
-  <title>POSQL</title>
+  <title>$caption</title>
  </head>
 <body>
 <div align="center">
@@ -10,16 +10,16 @@
 Debug: $debug
 }
 
-  <h1>$caption</h1>
 
 #if (! $hideForm) {
+  <h1>$caption</h1>
   <form method="get">
   <p>
    Db name <input type="test" name="db" 
 #if ($db) {  
     value="$db"
 }
-   >
+   />
   </p>
 <p>Enter plain old SQL below</p>
 <p><textarea name="query" rows="5" cols="50">$query</textarea>
@@ -28,21 +28,25 @@ Debug: $debug
 #if ($csv) {  
     checked
 }   
-  >
+  />
 </p>
 <p>
-<input type="submit" name="Run" value="Run">
+  Hide Form <input type="checkbox" name="hideForm" />
+</p>
+<p>
+<input type="submit" name="Run" value="Run" />
 </p>
   </form>
-}
-
 
 #if ($status) {
 <p>$status</p>
 }
 
+}
+
+
 #if ($results) {
-<table>
+<table border="1">
 #if ($titles) {
  <tr>
  #foreach $title in $titles {

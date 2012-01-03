@@ -48,7 +48,7 @@ public class Selection extends WMServlet {
         Vector<String> titles = new Vector<String>();
         ResultSetMetaData meta = rs.getMetaData();
         for (int i = 1; i < meta.getColumnCount() + 1; i++) {
-          titles.addElement(csvEscaped(meta.getColumnName(i)));
+          titles.addElement(csvEscaped(meta.getColumnLabel(i)));
         }
         while (rs.next()) {
           Vector<String> result = new Vector<String>();

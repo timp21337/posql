@@ -5,12 +5,12 @@
 <web-app>
   <display-name>Plain Old SQL Web App</display-name>
  <servlet>
-  <servlet-name>posql</servlet-name>
-  <servlet-class>com.github.timp21337.posql.POSQL</servlet-class>
+  <servlet-name>selection</servlet-name>
+  <servlet-class>com.github.timp21337.posql.Selection</servlet-class>
  </servlet>
 
  <servlet-mapping>
-  <servlet-name>posql</servlet-name>
+  <servlet-name>selection</servlet-name>
   <url-pattern>/selection/*</url-pattern>
  </servlet-mapping>
   

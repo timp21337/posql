@@ -20,7 +20,7 @@ public class Selection extends WMServlet {
 
   public Template handle(WebContext context) throws HandlerException {
     String caption = context.getForm("caption");
-    if (caption == null)
+    if (caption == null || caption.equals(""))
      caption =  "Plain Old SQL";
     context.put("caption", caption);
     String dbName = context.getForm("db");

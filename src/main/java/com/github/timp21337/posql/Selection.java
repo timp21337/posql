@@ -99,10 +99,10 @@ public class Selection extends WMServlet {
   private Connection getConnection(String dbName) {
     Connection conn = null;
     Configuration config = new Configuration("posql");
-    String dbBaseUrl = config.getSetProperty("dbBaseUrl"); // "jdbc:mysql://localhost:3306/";
-    String driver = config.getSetProperty("driver"); // "com.mysql.jdbc.Driver";
-    String user = config.getSetProperty("user"); // "root";
-    String password = config.get("password"); // optional
+    String dbBaseUrl = config.getSetProperty(dbName + ".dbBaseUrl"); // "jdbc:mysql://localhost:3306/";
+    String driver = config.getSetProperty(dbName + ".driver"); // "com.mysql.jdbc.Driver";
+    String user = config.getSetProperty(dbName + ".user"); // "root";
+    String password = config.get(dbName + ".password"); // optional
     try {
       Class.forName(driver).newInstance();
     } catch (Exception e) {

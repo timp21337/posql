@@ -50,7 +50,9 @@ public class Selection extends WMServlet {
         for (int i = 1; i < meta.getColumnCount() + 1; i++) {
           titles.addElement(csvEscaped(meta.getColumnLabel(i)));
         }
+        int rowCount = 0;
         while (rs.next()) {
+          rowCount++;
           Vector<String> result = new Vector<String>();
           for (int i = 1; i < meta.getColumnCount() + 1; i++) {
             String item = rs.getString(i);
@@ -62,6 +64,7 @@ public class Selection extends WMServlet {
         }
         context.put("titles", titles);
         context.put("results", results);
+        context.put("rowCount", rowCount);
         context.put("status", "OK");
         s.close();
         conn.close();
@@ -98,11 +101,11 @@ public class Selection extends WMServlet {
 
   private Connection getConnection(String dbName) {
     Connection conn = null;
-    Configuration config = new Configuration("posql");
-    String dbBaseUrl = config.getSetProperty(dbName + ".dbBaseUrl"); // "jdbc:mysql://localhost:3306/";
-    String driver = config.getSetProperty(dbName + ".driver"); // "com.mysql.jdbc.Driver";
-    String user = config.getSetProperty(dbName + ".user"); // "root";
-    String password = config.get(dbName + ".password"); // optional
+    Configuration config = new Configuration("posql", dbName);
+    String dbBaseUrl = config.getSetProperty("dbBaseUrl"); // "jdbc:mysql://localhost:3306/";
+    String driver = config.getSetProperty("driver"); // "com.mysql.jdbc.Driver";
+    String user = config.getSetProperty("user"); // "root";
+    String password = config.get("password"); // optional
     try {
       Class.forName(driver).newInstance();
     } catch (Exception e) {

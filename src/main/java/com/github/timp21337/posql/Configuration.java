@@ -24,9 +24,12 @@ public class Configuration {
   private Properties defaults;
   
   public Configuration(String appName) {
-    this(appName, null);
+    this(appName, appName);
   }
-  public Configuration(String appName, Properties defaults) {
+  public Configuration(String appName, String objectName) {
+    this(appName, objectName, null);
+  }
+  public Configuration(String appName, String objectName, Properties defaults) {
     super();
     this.defaults = defaults;
     this.homeVariableName = appName.toUpperCase() + "_HOME";
@@ -35,7 +38,7 @@ public class Configuration {
       this.configurationDirectoryName = "/etc/" + appName;
     else 
       this.configurationDirectoryName = envHome + "/conf";
-    this.propertiesFileName = this.configurationDirectoryName + "/" + appName + ".properties";
+    this.propertiesFileName = this.configurationDirectoryName + "/" + objectName + ".properties";
     File propertiesfile = new File(this.propertiesFileName);
     if (propertiesfile.exists())
       this.properties = fromFile(propertiesfile, defaults);

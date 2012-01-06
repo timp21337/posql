@@ -39,7 +39,13 @@ Debug: $debug
   </form>
 
 #if ($status) {
-<p>$status</p>
+<p>
+$status 
+#if ($rowCount) {
+  : $rowCount
+}
+
+</p>
 }
 
 }

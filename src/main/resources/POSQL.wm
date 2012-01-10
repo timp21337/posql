@@ -12,15 +12,15 @@ Debug: $debug
 
 
 #if (! $hideForm) {
-  <h1>$caption</h1>
-  <form method="get">
-  <p>
-   Db name <input type="test" name="db" 
+<h1>$caption</h1>
+<form method="get">
+<p>
+   Db name <input type="text" name="db" 
 #if ($db) {  
     value="$db"
 }
    />
-  </p>
+</p>
 <p>Enter plain old SQL below</p>
 <p><textarea name="query" rows="5" cols="50">$query</textarea>
 <p>
@@ -30,6 +30,14 @@ Debug: $debug
 }   
   />
 </p>
+<p>
+   File name <input type="text" name="filename" 
+#if ($filename) {  
+    value="$filename"
+}
+   />
+</p>
+
 <p>
   Hide Form <input type="checkbox" name="hideForm" />
 </p>

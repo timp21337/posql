@@ -31,8 +31,12 @@ public class Selection extends WMServlet {
     
     String csv = context.getForm("csv");
     context.put("csv", csv);
-    
     String templateName = csv == null ? "POSQL.wm" : "CSV.wm";
+    
+    String filename = context.getForm("filename");
+    if (filename == null) 
+      filename = "selection.csv";
+    context.put("filename", filename);
     
     context.put("query", "");
     String query = context.getForm("query");

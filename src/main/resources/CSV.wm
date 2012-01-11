@@ -1,4 +1,4 @@
-#set $Response.ContentType = "text/plain"
+#set $Response.ContentType = "text/plain; charset=ISO-8859-1"
 $Response.addHeader("Content-Disposition","attachment; filename=\"$filename\"")
 #set $doneOneTitle=false
 #if ($titles) #begin

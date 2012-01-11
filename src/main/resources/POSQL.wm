@@ -1,7 +1,8 @@
-#set $Response.ContentType = "text/html"
+#set $Response.ContentType = "text/html; charset=ISO-8859-1"
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40-971218/loose.dtd">
 <HTML>
  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>$caption</title>
  </head>
 <body>

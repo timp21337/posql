@@ -4,6 +4,9 @@
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>$caption</title>
+  <style>
+    input[type=text] {border-style:none;}
+  </style>
  </head>
 <body>
 <div align="center">
@@ -13,26 +16,23 @@ Debug: $debug
 
 
 #if (! $hideForm) {
-<h1>$caption</h1>
 <form method="get">
+<h1><input type="text" name="caption" style="font-size:larger;text-align:center;" value="$caption" /></h1>
 <p>
-   Db name <input type="text" name="db" 
+   Database <input type="text" name="db" 
 #if ($db) {  
     value="$db"
 }
    />
 </p>
-<p>Enter plain old SQL below</p>
-<p><textarea name="query" rows="5" cols="50">$query</textarea>
+<p><textarea name="query" rows="20" cols="90" style="border-style:none;" >$query</textarea>
 <p>
   CSV output <input type="checkbox" name="csv"
 #if ($csv) {  
     checked
 }   
   />
-</p>
-<p>
-   File name <input type="text" name="filename" 
+   to file <input type="text" name="filename"  size="40" 
 #if ($filename) {  
     value="$filename"
 }

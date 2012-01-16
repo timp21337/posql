@@ -27,6 +27,8 @@ public class Selection extends WMServlet {
     context.put("hideForm", context.getForm("hideForm"));
     
     String dbName = context.getForm("db");
+    if (dbName == null)
+      dbName="database";
     context.put("db", dbName);
     
     String csv = context.getForm("csv");
@@ -38,7 +40,6 @@ public class Selection extends WMServlet {
       filename = "selection.csv";
     context.put("filename", filename);
     
-    context.put("query", "");
     String query = context.getForm("query");
     //context.put("debug", "Query:" + query);
     if (query != null) {
@@ -76,6 +77,9 @@ public class Selection extends WMServlet {
         context.put("exception", e);
         context.put("trace", stackTraceToString(e));
       }
+    } else { 
+      query = "select ";
+      context.put("query", query);
     }
 
     try {

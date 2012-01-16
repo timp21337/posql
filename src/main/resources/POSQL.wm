@@ -5,7 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>$caption</title>
   <style>
-    input[type=text] {border-style:none;}
+    form *
+    {border-color:cyan; border-style: dotted; border-width: 1px;}
   </style>
  </head>
 <body>
@@ -18,15 +19,14 @@ Debug: $debug
 #if (! $hideForm) {
 <form method="get">
 <h1><input type="text" name="caption" style="font-size:larger;text-align:center;" value="$caption" /></h1>
-<p>
-   Database <input type="text" name="db" 
+   <input type="text" name="db" 
 #if ($db) {  
     value="$db"
 }
    />
-</p>
-<p><textarea name="query" rows="20" cols="90" style="border-style:none;" >$query</textarea>
-<p>
+<br />
+<textarea name="query" rows="20" cols="90" >$query</textarea>
+<br />
   CSV output <input type="checkbox" name="csv"
 #if ($csv) {  
     checked
@@ -37,14 +37,10 @@ Debug: $debug
     value="$filename"
 }
    />
-</p>
-
-<p>
+<br />
   Hide Form <input type="checkbox" name="hideForm" />
-</p>
-<p>
+<br />
 <input type="submit" name="Run" value="Run" />
-</p>
   </form>
 
 #if ($status) {

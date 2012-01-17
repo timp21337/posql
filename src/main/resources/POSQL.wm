@@ -6,7 +6,8 @@
   <title>$caption</title>
   <style>
     form *
-    {border-color:cyan; border-style: dotted; border-width: 1px;}
+    {border-color:blue; border-style: dotted; border-width: 1px;}
+    h1, div, span {border-style: none;}
   </style>
  </head>
 <body>
@@ -27,18 +28,27 @@ Debug: $debug
 <br />
 <textarea name="query" rows="20" cols="90" >$query</textarea>
 <br />
-  CSV output <input type="checkbox" name="csv"
+  CSV output <input type="checkbox" name="csv" id="csv" 
 #if ($csv) {  
     checked
 }   
+  onchange="document.getElementById('filename').style.visibility = (this.checked ? 'visible' : 'hidden');"
   />
+<br />
+  <span id="filename" 
+#if ($csv) {  
+ style="visibility:visible;"
+} #else { 
+ style="visibility:hidden;"
+}  
+    >
    to file <input type="text" name="filename"  size="40" 
 #if ($filename) {  
     value="$filename"
 }
-   />
+   /></span>
 <br />
-  Hide Form <input type="checkbox" name="hideForm" />
+  Hide form <input type="checkbox" name="hideForm" />
 <br />
 <input type="submit" name="Run" value="Run" />
   </form>

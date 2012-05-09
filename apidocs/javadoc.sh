@@ -1,1 +1,0 @@
-/usr/lib/jvm/java-6-openjdk-amd64/jre/../bin/javadoc @options @packages

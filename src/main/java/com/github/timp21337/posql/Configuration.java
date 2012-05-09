@@ -63,14 +63,14 @@ public class Configuration {
   }
 
   public String getSetProperty(String key) {
-    String s = properties.getProperty(key);
+    String s = get(key);
     if (s == null) 
       throw new NullPointerException("Property " + key + " is not set in configuration for " + appName);
     return s;
   }
   
   public String get(String key) {
-    return properties.getProperty(key);
+    return properties.getProperty(key) == null ? null : properties.getProperty(key).trim();
   }  
   public String put(String key, String value) {
     return (String) properties.put(key, value);

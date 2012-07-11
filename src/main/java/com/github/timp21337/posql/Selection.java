@@ -14,7 +14,12 @@ import org.webmacro.servlet.WMServlet;
 import org.webmacro.servlet.WebContext;
 
 /**
- * Plain Old SQL - issue an SQL query against the db.
+ * Plain Old SQL - issue an SQL query against a db.
+ * 
+ * Note that the name of the database is a logical name, 
+ * so that we can refer to two databases with the same 
+ * name on two different machines. 
+ * 
  */
 public class Selection extends WMServlet {
 
@@ -26,10 +31,10 @@ public class Selection extends WMServlet {
     
     context.put("hideForm", context.getForm("hideForm"));
     
-    String dbName = context.getForm("db");
-    if (dbName == null)
-      dbName="database";
-    context.put("db", dbName);
+    String dbLogicalName = context.getForm("db");
+    if (dbLogicalName == null)
+      dbLogicalName="database";
+    context.put("db", dbLogicalName);
     
     String csv = context.getForm("csv");
     context.put("csv", csv);
@@ -46,7 +51,7 @@ public class Selection extends WMServlet {
       checkQuery(query);
       context.put("query", query);
       try {
-        Connection conn = getConnection(dbName);
+        Connection conn = getConnection(dbLogicalName);
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery(query);
         Vector<Vector<String>> results = new Vector<Vector<String>>();
@@ -95,7 +100,7 @@ public class Selection extends WMServlet {
     if (!query.trim().toUpperCase().startsWith("SELECT"))
       throw new HandlerException("Queries must start with SELECT.");
     if (query.indexOf(';') != -1)
-      throw new HandlerException("No semi-colons alowed in query");      
+      throw new HandlerException("No semi-colons allowed in query");      
   }
 
   public String stackTraceToString(Throwable e) {
@@ -107,10 +112,10 @@ public class Selection extends WMServlet {
     return sb.toString();
   }
 
-  private Connection getConnection(String dbName) {
+  private Connection getConnection(String dbLogicalName) {
     Connection conn = null;
-    Configuration config = new Configuration("posql", dbName);
-    String dbBaseUrl = config.getSetProperty("dbBaseUrl"); // "jdbc:mysql://localhost:3306/";
+    Configuration config = new Configuration("posql", dbLogicalName);
+    String dbUrl = config.getSetProperty("dbUrl"); // "jdbc:mysql://localhost:3306/repository";
     String driver = config.getSetProperty("driver"); // "com.mysql.jdbc.Driver";
     String user = config.getSetProperty("user"); // "root";
     String password = config.get("password"); // optional
@@ -120,7 +125,7 @@ public class Selection extends WMServlet {
       throw new RuntimeException(e);
     }
     try {
-      conn = DriverManager.getConnection(dbBaseUrl + dbName, user, password);
+      conn = DriverManager.getConnection(dbUrl, user, password);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }

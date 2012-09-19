@@ -61,6 +61,9 @@ https://github.com/timp21337/${artifactId}/issues
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     
     <github.global.server>github</github.global.server>
+    <tomcat.username>admin</tomcat.username>
+    <tomcat.password></tomcat.password>
+    <tomcat.url>http://localhost:8080/manager/html</tomcat.url>
   </properties>
 
   <dependencies>
@@ -98,7 +101,7 @@ https://github.com/timp21337/${artifactId}/issues
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.4</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -148,6 +151,17 @@ https://github.com/timp21337/${artifactId}/issues
         <artifactId>tomcat6-maven-plugin</artifactId>
         <version>2.0-beta-1</version>
         <configuration>
+          <url>${tomcat.url}</url>
+          <username>${tomcat.username}</username>
+          <password>${tomcat.password}</password>
+        </configuration>
+      </plugin>
+      <plugin>
+       <groupId>org.apache.tomcat.maven</groupId>
+       <artifactId>tomcat7-maven-plugin</artifactId>
+       <version>2.0-beta-1</version>
+        <configuration>
+          <path>/${project.artifactId}</path>
           <url>${tomcat.url}</url>
           <username>${tomcat.username}</username>
           <password>${tomcat.password}</password>

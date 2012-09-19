@@ -29,7 +29,6 @@ import java.util.Properties;
 public class Configuration {
 
   private String appName;
-  private String homeVariableName;  
   private String configurationDirectoryName; 
   private String propertiesFileName;
   private Properties properties;
@@ -45,12 +44,7 @@ public class Configuration {
     super();
     this.appName = appName;
     this.defaults = defaults;
-    this.homeVariableName = appName.toUpperCase() + "_HOME";
-    String envHome = System.getenv(this.homeVariableName);
-    if (envHome == null) 
-      this.configurationDirectoryName = "/etc/" + appName;
-    else 
-      this.configurationDirectoryName = envHome + "/conf";
+    this.configurationDirectoryName = "/etc/" + appName;
     this.propertiesFileName = this.configurationDirectoryName + "/" + objectName + ".properties";
     File propertiesfile = new File(this.propertiesFileName);
     if (propertiesfile.exists())
